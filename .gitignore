@@ -1,14 +1,18 @@
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 
-.env
+# Virtual environment
 venv/
 .env/
 
+# Jupyter
 .ipynb_checkpoints/
 
-outputs/
+# Data files (DO NOT PUSH LARGE DATA)
 *.csv
 
+# OS files
 .DS_Store
+Thumbs.db
