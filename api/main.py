@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
 import pandas as pd
 import json
@@ -6,6 +8,15 @@ import json
 from models.pipeline import get_sentiment
 
 app = FastAPI(title="Sentiment Analysis API")
+
+# ---------------- CORS ----------------
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # You can replace * with frontend URL later
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ---------------- LOAD DATA ----------------
 try:
@@ -109,17 +120,40 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 @app.get("/top-words")
 def top_words(sentiment: str):
-    if df is None:
-        raise HTTPException(status_code=500, detail="Data not loaded")
+    try:
+        if df is None:
+            return {"sentiment": sentiment, "top_words": []}
 
-    texts = df[df['sentiment'] == sentiment]['processed_text']
+        sentiment = sentiment.strip().lower()
 
-    vec = TfidfVectorizer(max_features=20)
-    X = vec.fit_transform(texts)
+        temp = df.copy()
 
-    words = vec.get_feature_names_out()
-    scores = X.sum(axis=0).A1
+        temp["sentiment"] = temp["sentiment"].astype(str).str.lower()
+        temp["processed_text"] = temp["processed_text"].fillna("").astype(str)
 
-    top = [words[i] for i in scores.argsort()[-10:]]
+        texts = temp[temp["sentiment"] == sentiment]["processed_text"]
 
-    return {"sentiment": sentiment, "top_words": top}
+        texts = texts[texts.str.strip() != ""]
+
+        if len(texts) == 0:
+            return {"sentiment": sentiment, "top_words": []}
+
+        vec = TfidfVectorizer(stop_words="english", max_features=20)
+        X = vec.fit_transform(texts)
+
+        words = vec.get_feature_names_out()
+        scores = X.sum(axis=0).A1
+
+        top = [words[i] for i in scores.argsort()[::-1][:10]]
+
+        return {
+            "sentiment": sentiment,
+            "top_words": top
+        }
+
+    except Exception as e:
+        return {
+            "sentiment": sentiment,
+            "top_words": [],
+            "error": str(e)
+        }

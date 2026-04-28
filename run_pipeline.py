@@ -11,7 +11,7 @@ from sklearn.decomposition import LatentDirichletAllocation
 nltk.download('stopwords')
 
 # ---------------- LOAD DATA ----------------
-df = pd.read_csv(r"C:\Users\Hp\Desktop\sentiment\Twitter-and-Reddit-Sentimental-analysis\Twitter_Data.csv")
+df = pd.read_csv(r"C:\Users\deves\OneDrive\Desktop\sentiments\Sentiment-Analysis\Twitter_Data.csv")
 
 # ---------------- PREPROCESSING ----------------
 stop_words = set(stopwords.words('english'))
