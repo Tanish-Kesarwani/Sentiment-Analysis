@@ -1,1 +1,33 @@
-{"sentiment_distribution": {"positive": 77504, "negative": 50022, "neutral": 35449}, "topic_distribution": {"Elections & Party Politics": 69736, "Economic & Public Issues": 38032, "Political Campaign / Leadership": 28212, "National Achievements / Defense": 26995}, "topic_sentiment": {"negative": {"Economic & Public Issues": 34.21, "Elections & Party Politics": 31.18, "National Achievements / Defense": 22.45, "Political Campaign / Leadership": 32.64}, "neutral": {"Economic & Public Issues": 20.41, "Elections & Party Politics": 15.88, "National Achievements / Defense": 33.08, "Political Campaign / Leadership": 27.24}, "positive": {"Economic & Public Issues": 45.39, "Elections & Party Politics": 52.94, "National Achievements / Defense": 44.47, "Political Campaign / Leadership": 40.12}}}
+{
+    "sentiment_distribution": {
+        "neutral": 100162,
+        "negative": 45731,
+        "positive": 17082
+    },
+    "topic_distribution": {
+        "Elections & Party Politics": 69736,
+        "Economic & Public Issues": 38032,
+        "Political Campaign / Leadership": 28212,
+        "National Achievements / Defense": 26995
+    },
+    "topic_sentiment": {
+        "negative": {
+            "Economic & Public Issues": 28.52,
+            "Elections & Party Politics": 33.93,
+            "National Achievements / Defense": 15.28,
+            "Political Campaign / Leadership": 25.16
+        },
+        "neutral": {
+            "Economic & Public Issues": 62.73,
+            "Elections & Party Politics": 52.55,
+            "National Achievements / Defense": 75.49,
+            "Political Campaign / Leadership": 68.34
+        },
+        "positive": {
+            "Economic & Public Issues": 8.75,
+            "Elections & Party Politics": 13.52,
+            "National Achievements / Defense": 9.23,
+            "Political Campaign / Leadership": 6.5
+        }
+    }
+}
